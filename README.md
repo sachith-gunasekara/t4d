@@ -1,45 +1,33 @@
 # t4d
 
 [![Release](https://img.shields.io/github/v/release/sachith-gunasekara/t4d)](https://img.shields.io/github/v/release/sachith-gunasekara/t4d)
-[![Build status](https://img.shields.io/github/actions/workflow/status/sachith-gunasekara/t4d/main.yml?branch=main)](https://github.com/sachith-gunasekara/t4d/actions/workflows/main.yml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/sachith-gunasekara/t4d/branch/main/graph/badge.svg)](https://codecov.io/gh/sachith-gunasekara/t4d)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/sachith-gunasekara/t4d)](https://img.shields.io/github/commit-activity/m/sachith-gunasekara/t4d)
 [![License](https://img.shields.io/github/license/sachith-gunasekara/t4d)](https://img.shields.io/github/license/sachith-gunasekara/t4d)
 
-[D[D[C[C
 
-- **Github repository**: <https://github.com/sachith-gunasekara/t4d/>
-- **Documentation** <https://sachith-gunasekara.github.io/t4d/>
+# Project Description
 
-## Getting started with your project
+This project is a direct implementation of the conversion algorithm from the [ToMi](https://aclanthology.org/2022.emnlp-main.248/) dataset to the T4D (Thinking is for Doing) dataset introduced in the paper [https://arxiv.org/abs/2310.03051](https://arxiv.org/abs/2310.03051).
 
-First, create a repository on GitHub with the same name as this project, and then run the following commands:
+In the given ToMi dataset, we filter those examples that has a ToM (Theory of Mind) question from the corresponding story. Despite the original paper claiming that the character holding the false belief (which will also be the answer to the generated question from this code) is the one mentioned in the original question in ToMi, we had to adapt the algorithm slightly to account for questions that have second order false beliefs.
 
-```bash
-git init -b main
-git add .
-git commit -m "init commit"
-git remote add origin git@github.com:sachith-gunasekara/t4d.git
-git push -u origin main
-```
+NOTE. In the above modification made, an interested researcher may also notice that we could instead use those examples corresponding to first order false beliefs are recorded. However, upon inspection of the ToMi dataset, this criteria does not result in roughly 500 examples as mentioned in the paper. 
 
-Finally, install the environment and the pre-commit hooks with
+We warmly welcome collaborations to inspect this further.
+
+
+# Usage
+
+This project is built in a static manner to convert from a predefined dataset `A` (ToMi), included in the `t4d/data/` folder to dataset `B` (T4D), which is also found in the same folder after our runs of this code.
 
 ```bash
-make install
+git clone https://github.com/sachith-gunasekara/t4d # Clone repository
+cd t4d # Navigate to the project
+poetry install # Install dependencies (You may configure a preferred virtual environment or let poetry create an env automatically)
+python -m spacy download en_core_web_trf # Used for NER (Named Entity Recognition)
+python t4d/main.py
 ```
 
-You are now ready to start development on your project!
-The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
+# License
 
-To finalize the set-up for publishing to PyPi or Artifactory, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/publishing/#set-up-for-pypi).
-For activating the automatic documentation with MkDocs, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/mkdocs/#enabling-the-documentation-on-github).
-To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/codecov/).
-
-## Releasing a new version
-
-
-
----
-
-Repository initiated with [fpgmaas/cookiecutter-poetry](https://github.com/fpgmaas/cookiecutter-poetry).
+This project is licensed under the Apache License, Version 2.0.
