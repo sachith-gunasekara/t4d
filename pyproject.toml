@@ -20,13 +20,7 @@ spacy = {extras = ["cuda12x"], version = "^3.7.6"}
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
 mypy = "^1.5.1"
-pre-commit = "^3.4.0"
 tox = "^4.11.1"
-
-[tool.poetry.group.docs.dependencies]
-mkdocs = "^1.4.2"
-mkdocs-material = "^9.2.7"
-mkdocstrings = {extras = ["python"], version = "^0.23.0"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
